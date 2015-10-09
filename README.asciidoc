@@ -1,0 +1,38 @@
+= Mediaconvert
+
+This project contains two simple Dockerfiles
+to create Docker images dedicated to video or photo manipulation.
+
+== Images description & Usage
+=== process-media
+
+This image will :
+
+* process photos and reset the Exif Orientation Tag by rotating if required, using `exifautotran`.
+* Compress .AVI files to .mp4 using `avconv`
+
+Usage:
+
+    $ docker run -v $PWD:/photos batmat/process-media
+
+=== rotate-video
+
+This image, as its name implies, lets you easily rotate a video.
+
+Usage (r=right, l=left):
+
+    $ docker run --rm -it -v $PWD:/photos batmat/rotate-video the-video.mp4 r
+
+== Why this repository? Are you crazy? It's far simpler to installer avconv & so on locally!
+
+Well, this was the config I previously had. BUT, I've migrated my old script to Docker for
+at least two reasons:
+
+. Previously on Ubuntu, I've been bitten in the past by some upgrade where my script
+  would simply not work anymore. Or worse, doing a low-quality conversion after an upgrade
+  without me necessarily noticing
+. Having recently gone from Ubuntu to Fedora, my scripts just didn't work anymore: `avconv`
+  is simply unavailable under Fedora. Hence, instead of trying to fight life again and convert
+  them to `ffmpeg` or something, and as I had already started using Docker about a year ago,
+  this sounded like an obvious choice to use it for that.
+. Bonus one: I love Docker :-).

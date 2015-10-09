@@ -2,5 +2,5 @@
 
 set -eou pipefail
 
-docker build -f Dockerfile-process -t batmat/process-media .
-docker build -f Dockerfile-rotate -t batmat/rotate-video .
+docker build -t batmat/process-media process-media
+docker build -t batmat/rotate-video  rotate-video

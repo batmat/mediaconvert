@@ -1,6 +1,7 @@
 #!/bin/bash
 set -eou pipefail
 
+original=$1
 cible=$(echo $1|cut -d'.' -f1)-rotated.mp4
 
 if [ "a$2" = "al" ] ;then
@@ -12,5 +13,8 @@ else
 	exit 1
 fi
 
-avconv -i "$1" -ar 44100 -c:a mp3 -c:v libx264 -vf transpose=$rotate "$cible"
-touch -a -m -r "$1" "$cible"
+avconv -i "$original" -c:a copy -c:v libx264 -vf transpose=$rotate "$cible"
+touch -a -m -r "$original" "$cible"
+
+mv $original original.$original
+mv $cible $original

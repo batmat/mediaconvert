@@ -16,5 +16,5 @@ fi
 avconv -i "$original" -c:a copy -c:v libx264 -vf transpose=$rotate "$cible"
 touch -a -m -r "$original" "$cible"
 
-mv $original original.$original
-mv $cible $original
+mv "$original" "$original".original.mp4
+mv "$cible" "$original"
